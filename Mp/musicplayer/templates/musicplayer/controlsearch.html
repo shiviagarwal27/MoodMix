@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Search - Control Pannel-MoodMix</title>
+
+
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/cover/">
+
+    <meta name="theme-color" content="#7952b3">
+
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body class="text-white bg-dark">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-start mb-0">Welcome admin</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <form id="searchForm" class="d-flex" action="/musicplayer/controlsearch" method="get">
+                        <input id="input" class="form-control me-2" name="search" type="search" placeholder="Search"
+                          aria-label="Search"> <button class="btn btn-light" id="button" type="button"
+                          style="position: relative;right: 14px;"><i class="bi bi-mic" id="mic">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic"
+                              viewBox="0 0 16 16">
+                              <path
+                                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
+                              <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z" />
+                            </svg></i></button>
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                      </form>
+                    <a class="nav-link active" aria-current="page" href="/musicplayer">Explore Music</a>
+                    <a class="nav-link" href="/adminPage">Add Songs</a>
+                    <a class="nav-link" href="/musicplayer/control">Control Music</a>
+                    <a class="nav-link" href="/musicplayer/contactInfo">Contact Info</a>
+                    <a class="nav-link"  href="/loginOut">logout</a>
+                </nav>
+            </div>
+        </header>
+        <h2 class="my-2">Search results : </h2>
+        <!-- ****** -->
+
+        
+           
+        
+            {% if allSongs|length < 1 %}
+           <p>No search results</p>
+            Your search query : <b>{{query}}</b> did not match any documents. <br>
+            Suggestions:
+            <ul>
+            <li>Make sure that all words are spelled correctly.</li>
+            <li>Try more general keywords.</li>
+           <li> Try fewer keywords.</li>
+           <li> Try different keywords.</li>
+            </li>
+            </ul>
+           {% else %}
+            <div class="container d-flex h-100 justify-content-center align-items-center my-3" style="border: 1px solid white;">
+            <table class="table text-light">
+                <thead>
+                    <tr>
+                        <th scope="col">Sr.No</th>
+                        <th scope="col">Song Name</th>
+                        <th scope="col">Artist</th>
+                        <th scope="col">Movie Name</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Emotions</th>
+                        <th scope="col">Emojies</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for range,music in allSongs %}
+                    {% for i in range %}
+                    <tr>
+                        <th scope="row">{{i.song_id}}</th>
+                        <td>{{i.song_name}}</td>
+                        <td>{{i.song_artist}}</td>
+                        <td>{{i.movie_name}}</td>
+                        <td>{{i.song_category}}</td>
+                        <td>{{i.emotions}}</td>
+                        <td>&#{{i.emojies}};</td>
+                        <td><a href="/musicplayer/edit/{{i.song_id}}"><button class="btn btn-primary">Edit</button></a></td>
+                         <td><a href="/musicplayer/delete/{{i.song_id}}"><button class="btn btn-primary float-start">Delete</button></a></td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+        <script>
+
+
+            const serachForm = document.querySelector("#serachForm")
+            const serachFormInput = document.querySelector("#input")
+            const micBtn = document.querySelector("#button")
+            const micIcon = document.getElementById("mic")
+        
+        
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRecognition) {
+              const recognition = new SpeechRecognition();
+              micBtn.addEventListener("click", micBtnClick);
+              function micBtnClick() {
+                if (micIcon.classList.contains("bi-mic")) {
+                  //start speech Recognition
+        
+                  recognition.start();
+        
+        
+                } else {
+                  //stop speech Recognition
+        
+                  recognition.stop();
+                }
+              }
+              recognition.addEventListener("start", startSpeechRecognition);
+        
+              function startSpeechRecognition() {
+                micIcon.classList.remove("bi-mic");
+                micIcon.classList.add("bi-mic-mute");
+                let html = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic-mute" viewBox="0 0 16 16">
+                    <path d="M13 8c0 .564-.094 1.107-.266 1.613l-.814-.814A4.02 4.02 0 0 0 12 8V7a.5.5 0 0 1 1 0v1zm-5 4c.818 0 1.578-.245 2.212-.667l.718.719a4.973 4.973 0 0 1-2.43.923V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 1 0v1a4 4 0 0 0 4 4zm3-9v4.879l-1-1V3a2 2 0 0 0-3.997-.118l-.845-.845A3.001 3.001 0 0 1 11 3z"/>
+                    <path d="m9.486 10.607-.748-.748A2 2 0 0 1 6 8v-.878l-1-1V8a3 3 0 0 0 4.486 2.607zm-7.84-9.253 12 12 .708-.708-12-12-.708.708z"/>
+                  </svg>`;
+                micIcon.innerHTML = html;
+                serachFormInput.focus();
+              }
+        
+              recognition.addEventListener("end", endSpeechRecognition);
+        
+              function endSpeechRecognition() {
+                micIcon.classList.remove("bi-mic-mute");
+                micIcon.classList.add("bi-mic");
+                let html = ` <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                    <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z"/>
+                    <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z"/>
+                  </svg>`;
+                micIcon.innerHTML = html;
+                serachFormInput.focus();
+        
+              }
+              recognition.addEventListener("result", resultofSpeechRecognition);
+        
+              function resultofSpeechRecognition(event) {
+                const transcript = event.results[0][0].transcript;
+                serachFormInput.value = transcript;
+              }
+        
+            } else {
+              console.log('nooo');
+            }
+        
+          </script>
+</body>
+
+</html>

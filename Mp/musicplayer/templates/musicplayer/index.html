@@ -1,0 +1,111 @@
+{% extends 'musicplayer/basic.html' %}
+{% block title %}MoodMix - Now Music in Your Hands{% endblock %}
+{% block css %}
+
+{% endblock %}
+{% block body %}
+{% load static %}
+<div class="main">
+<div class="container-fluid" style="height:80.6vh">
+    <div class="container" style="width: 40vw;position:absolute;top:25vh;left:40vw;">
+    <h1>MoodMix</h1>
+    <h5>Explore the range of Music According to your Mood</h5>
+  </div>
+  <div class="" style="width: 60vw;position:absolute;top:50vh;left:20vw">
+    <h3 class="mb-2 mx-5">Just Search Your mood</h3>
+    <div class="container-fluid d-flex my-4">
+    <form id="searchForm" class="d-flex" style="height:8vh" action="/musicplayer/search" method="get">
+        <input id="input"  class="form-control me-2" style="width: 20vw" name="search" type="search" placeholder="Search"
+          aria-label="Search"> <button class="btn btn-light" id="button" type="button"
+          style="position: relative;right: 14px;"><i class="bi bi-mic" id="mic">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic"
+              viewBox="0 0 16 16">
+              <path
+                d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5z" />
+              <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0v5zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3z" />
+            </svg></i></button>
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+      </form>
+      <form class="d-flex mx-5 " action="/musicplayer/search" method="get">
+        <select class="form-select form-select-sm" name="search" style="width: 20vw;height:8vh" aria-label=".form-select-sm example">
+          <option value="" selected>Search by Emojies</option>
+          <option value="128525">&#128525;</option>
+          <option value="128512">&#128512;</option>
+          <option value="128532">&#128532;</option>
+          <option value="128526">&#128526;</option>
+          <option value="128537">&#128537;</option>
+        </select>
+        </select>
+        <button class="btn btn-outline-primary mx-2" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Footer-->
+<footer class="border-top">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item mx-2">
+                        <a href="#" target="_blank">
+                            <span class="fa-stack fa-lg mx-2">
+                                <!-- <i class="fas fa-circle fa-stack-2x"></i> -->
+                                <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item mx-2">
+                        <a href="#" target="_blank">
+                            <span class="fa-stack fa-lg mx-2">
+                                <!-- <i class="fas fa-circle fa-stack-2x"></i> -->
+                                <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" target="_blank">
+                            <span class="fa-stack fa-lg mx-2">
+                                <!-- <i class="fas fa-circle fa-stack-2x"></i> -->
+                                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#" target="_blank">
+                            <span class="fa-stack fa-lg mx-2">
+                                <!-- <i class="fas fa-circle fa-stack-2x"></i> -->
+                                <i class="fab fa-instagram fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="small text-center text-muted fst-italic">Copyright &copy; MoodMix</div>
+            </div>
+        </div>
+    </div>
+</footer
+  {% endblock %}
+ 
+  {% block js %}
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+    
+  <script>
+    $(function(){
+      $("audio").on("play", function() {
+          $("audio").not(this).each(function(index, audio) {
+              audio.pause();
+          });
+      });
+  });
+</script>
+
+
+{% endblock %}
