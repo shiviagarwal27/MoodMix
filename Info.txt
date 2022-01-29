@@ -1,0 +1,33 @@
+django project name - Mp
+django aap 1 - home
+django app 2 - musicplayer(main)
+
+
+In Home:
+1) static --> images --> big carousel - Background images(3)
+
+2) templates --> 1) index.html, 2) Login.html, 3) Signup.html
+
+3)urls.py --> 1) login , hanglelogin --> due to some errors i have make two functions for login
+	      2) signup, hanglesignup --> due to some errors i have make two functions for signup
+	      3) logout function
+	      4) login for admin
+	      5) pipeline for otherapp i.e musicplayer
+
+4)views.py --> functions for login, signup, logout, index
+5) No any Models in this app
+
+********************************
+
+In musicplayer
+1) static --> 1) images --> songs cover images store
+              2) songs --> all songs stores in this folder
+
+2) templates --> all main html files here
+
+3)urls.py --> all main pipelines are here
+              like : addsong, search, delete, edit, contact, music control, control search, view all songs
+
+4)views.py --> addsong, search, delete, edit, contact, music control, control search, view all songs
+
+5) Models --> music Db and contact
